@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "node build.js"
+    "build": "tsx build.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "devDependencies": {
     "@wyw-in-js/esbuild": "^0.5.5",
     "esbuild": "^0.25.1",
-    "esbuild-plugin-babel": "^0.2.3"
+    "esbuild-plugin-babel": "^0.2.3",
+    "tsx": "^4.19.3"
   }
 }
