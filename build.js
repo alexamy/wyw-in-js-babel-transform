@@ -28,7 +28,7 @@ function linaria() {
     preprocessor: 'none',
     babelOptions: {
       plugins: [
-        path.resolve(__dirname, './babelPlugin.js'),
+        path.resolve(__dirname, 'babelPlugin.js'),
       ]
     },
   })
@@ -40,7 +40,7 @@ function babel() {
     filter: /\.js$/,
     config: {
       plugins: [
-        path.resolve(__dirname, './babelPlugin.js'),
+        path.resolve(__dirname, 'babelPlugin.js'),
       ],
     },
   });
