@@ -2,10 +2,9 @@ import wyw from "@wyw-in-js/esbuild";
 import { build } from "esbuild";
 import babelPlugin from "esbuild-plugin-babel";
 import fs from 'fs/promises';
+import path from 'path';
 
-// WARNING: When using the Linaria, change the babel plugin path to an absolute one in your system
-// because relative paths combined with the cwd do not work with Linaria,
-// but work with the Babel esbuild plugin.
+const __dirname = new URL('.', import.meta.url).pathname;
 
 // build
 await build({
@@ -29,8 +28,7 @@ function linaria() {
     preprocessor: 'none',
     babelOptions: {
       plugins: [
-        // MODIFY THIS PATH TO ABSOLUTE PATH IN YOUR SYSTEM
-        '/home/alex/hobby/wyw-in-js-babel-transform/babelPlugin.js',
+        path.resolve(__dirname, './babelPlugin.js'),
       ]
     },
   })
@@ -41,9 +39,8 @@ function babel() {
   return babelPlugin({
     filter: /\.js$/,
     config: {
-      cwd: process.cwd(),
       plugins: [
-        './babelPlugin.js'
+        path.resolve(__dirname, './babelPlugin.js'),
       ],
     },
   });
