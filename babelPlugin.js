@@ -5,7 +5,11 @@ export default function stringToUpperCasePlugin() {
     name: 'babel-plugin-example',
     visitor: {
       StringLiteral(path) {
-        path.node.value = path.node.value.toString().toUpperCase()
+        const input = path.node.value;
+        const output = input.toString().toUpperCase();
+        console.log("Transforming string literal", { input, output });
+
+        path.node.value = output;
       }
     },
   };
