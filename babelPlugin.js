@@ -7,7 +7,7 @@ export default function stringToUpperCasePlugin() {
       StringLiteral(path) {
         const input = path.node.value;
         const output = input.toString().toUpperCase();
-        console.log("Transforming string literal", { input, output });
+        console.log("Transforming string literal:", { input, output });
 
         path.node.value = output;
       }
