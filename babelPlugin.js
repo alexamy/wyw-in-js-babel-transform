@@ -1,8 +1,12 @@
-export default function() {
+export default function stringToUpperCasePlugin() {
   console.log("In babel plugin!");
 
   return {
     name: 'babel-plugin-example',
-    visitor: {},
+    visitor: {
+      StringLiteral(path) {
+        path.node.value = path.node.value.toString().toUpperCase()
+      }
+    },
   };
 }
