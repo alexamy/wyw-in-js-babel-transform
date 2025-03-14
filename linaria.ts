@@ -1,5 +1,6 @@
 /**
  * https://github.com/Anber/wyw-in-js/blob/05d3d7234728a8574792d185a8fcb412696707fa/packages/esbuild/src/index.ts
+ *
  * This file contains an esbuild loader for wyw-in-js.
  * It uses the transform.ts function to generate class names from source code,
  * returns transformed code without template literals and attaches generated source maps
@@ -16,6 +17,7 @@ import type {
   Preprocessor,
   IFileReporterOptions,
 } from '@wyw-in-js/transform';
+
 import {
   slugify,
   transform,
@@ -35,7 +37,6 @@ const nodeModulesRegex = /^(?:.*[\\/])?node_modules(?:[\\/].*)?$/;
 
 export default function wywInJS({
   debug,
-  sourceMap,
   preprocessor,
   esbuildOptions,
   filter = /\.(js|jsx|ts|tsx)$/,
@@ -111,15 +112,9 @@ export default function wywInJS({
         const transformed = transformSync(rawCode, {
           ...options,
           sourcefile: args.path,
-          sourcemap: sourceMap,
           loader,
         });
         let { code } = transformed;
-
-        if (sourceMap) {
-          const esbuildMap = Buffer.from(transformed.map).toString('base64');
-          code += `/*# sourceMappingURL=data:application/json;base64,${esbuildMap}*/`;
-        }
 
         const transformServices = {
           options: {
@@ -147,15 +142,6 @@ export default function wywInJS({
         const cssFilename = `${filename}_${slug}.wyw.css`;
 
         let contents = `import ${JSON.stringify(cssFilename)}; ${result.code}`;
-
-        if (sourceMap && result.cssSourceMapText) {
-          const map = Buffer.from(result.cssSourceMapText).toString('base64');
-          cssText += `/*# sourceMappingURL=data:application/json;base64,${map}*/`;
-          const wywMap = Buffer.from(JSON.stringify(result.sourceMap)).toString(
-            'base64'
-          );
-          contents += `/*# sourceMappingURL=data:application/json;base64,${wywMap}*/`;
-        }
 
         cssLookup.set(cssFilename, cssText);
 
