@@ -12,6 +12,7 @@
   "description": "",
   "devDependencies": {
     "@wyw-in-js/esbuild": "^0.5.5",
+    "@wyw-in-js/transform": "^0.5.5",
     "esbuild": "^0.25.1",
     "esbuild-plugin-babel": "^0.2.3",
     "tsx": "^4.19.3"

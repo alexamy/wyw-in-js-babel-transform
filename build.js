@@ -1,4 +1,4 @@
-import wyw from "@wyw-in-js/esbuild";
+import wyw from "./linaria.ts";
 import { build } from "esbuild";
 import babelPlugin from "esbuild-plugin-babel";
 import fs from 'fs/promises';
