@@ -1,8 +1,8 @@
 diff --git a/node_modules/@wyw-in-js/esbuild/esm/index.mjs b/node_modules/@wyw-in-js/esbuild/esm/index.mjs
-index 51afde5..bf00fee 100644
+index 51afde5..e39cce7 100644
 --- a/node_modules/@wyw-in-js/esbuild/esm/index.mjs
 +++ b/node_modules/@wyw-in-js/esbuild/esm/index.mjs
-@@ -8,6 +8,7 @@ import { readFileSync } from 'fs';
+@@ -8,12 +8,14 @@ import { readFileSync } from 'fs';
  import { basename, dirname, isAbsolute, join, parse, posix } from 'path';
  import { transformSync } from 'esbuild';
  import { slugify, transform, TransformCacheCollection, createFileReporter } from '@wyw-in-js/transform';
@@ -10,7 +10,14 @@ index 51afde5..bf00fee 100644
  const nodeModulesRegex = /^(?:.*[\\/])?node_modules(?:[\\/].*)?$/;
  export default function wywInJS({
    debug,
-@@ -84,12 +85,19 @@ export default function wywInJS({
+   sourceMap,
+   preprocessor,
+   esbuildOptions,
++  babelPreTransformConfig,
+   filter = /\.(js|jsx|ts|tsx)$/,
+   ...rest
+ } = {}) {
+@@ -84,12 +86,17 @@ export default function wywInJS({
              options.jsxFragment = build.initialOptions.jsxFragment;
            }
          }
@@ -22,11 +29,9 @@ index 51afde5..bf00fee 100644
            loader
          });
 +
-+        const transformed = babelTransformSync(transformedJs.code, {
-+          plugins: [
-+            join(process.cwd(), 'babelPlugin.js'),
-+          ],
-+        });
++        const transformed = babelTransformSync(transformedJs.code,
++          babelPreTransformConfig
++        );
 +
          let {
            code
