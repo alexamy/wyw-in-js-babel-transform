@@ -4,16 +4,19 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsx build.js"
+    "build": "tsx build.js",
+    "postinstall": "patch-package"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@babel/core": "^7.26.10",
     "@wyw-in-js/esbuild": "^0.5.5",
     "esbuild": "^0.25.1",
     "esbuild-plugin-babel": "^0.2.3",
+    "patch-package": "^8.0.0",
     "tsx": "^4.19.3"
   }
 }

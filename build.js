@@ -26,7 +26,7 @@ console.log('Build result:', { input, output });
 function linaria() {
   return wyw({
     preprocessor: 'none',
-    babelOptions: {
+    babelPreTransformOptions: {
       plugins: [
         path.resolve(__dirname, 'babelPlugin.js'),
       ]
