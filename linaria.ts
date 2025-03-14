@@ -15,28 +15,23 @@ import { transformSync } from 'esbuild';
 import type {
   PluginOptions,
   Preprocessor,
-  IFileReporterOptions,
 } from '@wyw-in-js/transform';
 
 import {
   slugify,
   transform,
   TransformCacheCollection,
-  createFileReporter,
 } from '@wyw-in-js/transform';
 
 type EsbuildPluginOptions = {
-  debug?: IFileReporterOptions | false | null | undefined;
-  esbuildOptions?: TransformOptions;
   filter?: RegExp | string;
+  esbuildOptions?: TransformOptions;
   preprocessor?: Preprocessor;
-  sourceMap?: boolean;
 } & Partial<PluginOptions>;
 
 const nodeModulesRegex = /^(?:.*[\\/])?node_modules(?:[\\/].*)?$/;
 
 export default function wywInJS({
-  debug,
   preprocessor,
   esbuildOptions,
   filter = /\.(js|jsx|ts|tsx)$/,
