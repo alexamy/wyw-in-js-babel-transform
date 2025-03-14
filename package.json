@@ -14,7 +14,6 @@
   "devDependencies": {
     "@babel/core": "^7.26.10",
     "@wyw-in-js/esbuild": "^0.5.5",
-    "@wyw-in-js/transform": "^0.5.5",
     "esbuild": "^0.25.1",
     "esbuild-plugin-babel": "^0.2.3",
     "patch-package": "^8.0.0",
