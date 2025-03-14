@@ -48,8 +48,6 @@ export default function wywInJS({
     setup(build) {
       const cssLookup = new Map<string, string>();
 
-      const { emitter, onDone } = createFileReporter(debug ?? false);
-
       const asyncResolve = async (
         token: string,
         importer: string
@@ -69,10 +67,6 @@ export default function wywInJS({
 
         return result.path.replace(/\\/g, posix.sep);
       };
-
-      build.onEnd(() => {
-        onDone(process.cwd());
-      });
 
       build.onResolve({ filter: /\.wyw\.css$/ }, (args) => {
         return {
@@ -135,7 +129,6 @@ export default function wywInJS({
             pluginOptions: rest,
           },
           cache,
-          eventEmitter: emitter,
         };
 
         const result = await transform(transformServices, code, asyncResolve);
