@@ -1,5 +1,5 @@
 diff --git a/node_modules/@wyw-in-js/esbuild/esm/index.mjs b/node_modules/@wyw-in-js/esbuild/esm/index.mjs
-index 51afde5..e39cce7 100644
+index 51afde5..059daa0 100644
 --- a/node_modules/@wyw-in-js/esbuild/esm/index.mjs
 +++ b/node_modules/@wyw-in-js/esbuild/esm/index.mjs
 @@ -8,12 +8,14 @@ import { readFileSync } from 'fs';
@@ -13,7 +13,7 @@ index 51afde5..e39cce7 100644
    sourceMap,
    preprocessor,
    esbuildOptions,
-+  babelPreTransformConfig,
++  babelPreTransformOptions,
    filter = /\.(js|jsx|ts|tsx)$/,
    ...rest
  } = {}) {
@@ -30,9 +30,28 @@ index 51afde5..e39cce7 100644
          });
 +
 +        const transformed = babelTransformSync(transformedJs.code,
-+          babelPreTransformConfig
++          babelPreTransformOptions
 +        );
 +
          let {
            code
          } = transformed;
+diff --git a/node_modules/@wyw-in-js/esbuild/types/index.d.ts b/node_modules/@wyw-in-js/esbuild/types/index.d.ts
+index a978714..13e6f07 100644
+--- a/node_modules/@wyw-in-js/esbuild/types/index.d.ts
++++ b/node_modules/@wyw-in-js/esbuild/types/index.d.ts
+@@ -5,12 +5,14 @@
+  */
+ import type { Plugin, TransformOptions } from 'esbuild';
+ import type { PluginOptions, Preprocessor, IFileReporterOptions } from '@wyw-in-js/transform';
++import type { TransformOptions as BabelTransformOptions } from '@babel/core';
+ type EsbuildPluginOptions = {
+     debug?: IFileReporterOptions | false | null | undefined;
+     esbuildOptions?: TransformOptions;
+     filter?: RegExp | string;
+     preprocessor?: Preprocessor;
+     sourceMap?: boolean;
++    babelPreTransformOptions?: BabelTransformOptions;
+ } & Partial<PluginOptions>;
+ export default function wywInJS({ debug, sourceMap, preprocessor, esbuildOptions, filter, ...rest }?: EsbuildPluginOptions): Plugin;
+ export {};
